@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation"
+            app:startDestination="@+id/navigation_music">
+
+    <fragment
+            android:id="@+id/navigation_music"
+            android:name="com.kgc.kirbomusic.ui.music.MusicFragment"
+            android:label="@string/title_music"
+            tools:layout="@layout/fragment_music"/>
+    <fragment
+            android:id="@+id/navigation_news"
+            android:name="com.kgc.kirbomusic.ui.news.NewsFragment"
+            android:label="@string/title_news"
+            tools:layout="@layout/fragment_news"/>
+</navigation>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Kirbo Music</string>
+    <string name="title_music">Музыка</string>
+    <string name="title_news">Новости</string>
+</resources>
