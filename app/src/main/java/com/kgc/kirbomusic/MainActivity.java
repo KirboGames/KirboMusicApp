@@ -1,5 +1,6 @@
 package com.kgc.kirbomusic;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
@@ -53,12 +54,14 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue = Volley.newRequestQueue(this);
         createFiles();
         getDataBaseUpdate();
-        readDatabase();
+        Music = readDatabase(this);
         downloadCovers();
     }
-    public void readDatabase() {
+    public static JSONArray readDatabase(Context ctx) {
         String databaseString = "";
-
+        JSONArray Music;
+        String externalFilesDir = ctx.getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
+        File music = new File(externalFilesDir + "/music.json");
         try {
             Scanner reader = new Scanner(music);
             while (reader.hasNextLine()) {
@@ -67,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {}
         try {
             Music = new JSONArray(databaseString);
+            return Music;
         } catch (JSONException e) {}
+        return null;
     }
 
     public void downloadCovers() {
