@@ -10,7 +10,9 @@
         android:layout_height="100dp"
         android:id="@+id/cover"/>
     <TextView
-        android:text="dadasf"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+        android:id="@+id/trackName"
+        android:textSize="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

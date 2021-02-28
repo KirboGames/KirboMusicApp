@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -41,9 +42,11 @@ public class TracksAdapter extends BaseAdapter {
         if(view == null){
             view = layoutInflater.inflate(R.layout.tracks_item, parent, false);
         }
-        Track t = objects.get(position);
-
-        ((ImageView) view.findViewById(R.id.cover)).setImageBitmap(t.cover);
+        if(objects != null) {
+            Track t = objects.get(position);
+            ((ImageView) view.findViewById(R.id.cover)).setImageBitmap(t.cover);
+            ((TextView) view.findViewById(R.id.trackName)).setText(t.trackName);
+        }
         return view;
     }
 }

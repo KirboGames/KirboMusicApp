@@ -21,6 +21,7 @@ import com.kgc.kirbomusic.Track;
 import com.kgc.kirbomusic.TracksAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class MusicFragment extends Fragment {
         tracks = new ArrayList<Track>();
         Music = MainActivity.readDatabase(inflater.getContext());
         try {
+            if(Music != null)
             fillData(inflater.getContext().getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
         } catch (JSONException e) {e.printStackTrace();}
 
@@ -52,9 +54,9 @@ public class MusicFragment extends Fragment {
     }
     public void fillData(String appDir) throws JSONException {
         for(int i = 0; i < Music.length(); i++){
-
-            Bitmap bitmap = BitmapFactory.decodeFile(appDir + "/Cover/" + Music.getJSONObject(i).getString("cover") + ".jpg");
-            tracks.add(new Track(bitmap));
+            JSONObject track = Music.getJSONObject(i);
+            Bitmap bitmap = BitmapFactory.decodeFile(appDir + "/Cover/" + track.getString("cover") + ".jpg");
+            tracks.add(new Track(bitmap, track.getString("track"), track.getString("releaseDate"), track.getBoolean("released")));
         }
     }
 }

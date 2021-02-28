@@ -36,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        externalFilesDir = getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
+        music = new File(externalFilesDir + "/music.json");
+        version = new File(externalFilesDir + "/version");
+        coverDir = new File(externalFilesDir + "/Cover");
+        RequestQueue = Volley.newRequestQueue(this);
+        createFiles();
+        getDataBaseUpdate();
+        Music = readDatabase(this);
+        downloadCovers();
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -47,15 +58,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        externalFilesDir = getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
-        music = new File(externalFilesDir + "/music.json");
-        version = new File(externalFilesDir + "/version");
-        coverDir = new File(externalFilesDir + "/Cover");
-        RequestQueue = Volley.newRequestQueue(this);
-        createFiles();
-        getDataBaseUpdate();
-        Music = readDatabase(this);
-        downloadCovers();
+
     }
     public static JSONArray readDatabase(Context ctx) {
         String databaseString = "";
