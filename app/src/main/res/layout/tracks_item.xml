@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-<ImageView
+        android:orientation="horizontal"
+        android:padding="10dp">
+    <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/cover"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:text="dadasf"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+</LinearLayout>
