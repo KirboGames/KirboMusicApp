@@ -42,7 +42,7 @@ public class MusicFragment extends Fragment {
         Music = MainActivity.readDatabase(inflater.getContext());
         try {
             if(Music != null)
-            fillData(inflater.getContext().getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
+                fillData(inflater.getContext().getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
         } catch (JSONException e) {e.printStackTrace();}
 
         tracksAdapter = new TracksAdapter(inflater.getContext(), tracks);
@@ -53,10 +53,10 @@ public class MusicFragment extends Fragment {
         return root;
     }
     public void fillData(String appDir) throws JSONException {
-        for(int i = 0; i < Music.length(); i++){
+        for(int i = Music.length() - 1; i >= 0; i--){
             JSONObject track = Music.getJSONObject(i);
             Bitmap bitmap = BitmapFactory.decodeFile(appDir + "/Cover/" + track.getString("cover") + ".jpg");
-            tracks.add(new Track(bitmap, track.getString("track"), track.getString("releaseDate"), track.getBoolean("released")));
+            tracks.add(new Track(bitmap, track.getString("name"), track.getString("releaseDate"), track.getBoolean("released")));
         }
     }
 }

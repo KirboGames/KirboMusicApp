@@ -46,6 +46,7 @@ public class TracksAdapter extends BaseAdapter {
             Track t = objects.get(position);
             ((ImageView) view.findViewById(R.id.cover)).setImageBitmap(t.cover);
             ((TextView) view.findViewById(R.id.trackName)).setText(t.trackName);
+            ((TextView) view.findViewById(R.id.releaseDate)).setText(((t.released) ? "Вышел " : "Выйдет ") + t.releaseDate);
         }
         return view;
     }
