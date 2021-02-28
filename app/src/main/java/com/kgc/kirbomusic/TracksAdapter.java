@@ -1,13 +1,17 @@
 package com.kgc.kirbomusic;
 
 import android.content.Context;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.kgc.kirbomusic.ui.music.MusicFragment;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TracksAdapter extends BaseAdapter {
@@ -42,11 +46,24 @@ public class TracksAdapter extends BaseAdapter {
         if(view == null){
             view = layoutInflater.inflate(R.layout.tracks_item, parent, false);
         }
+        final Context ctx = view.getContext();
         if(objects != null) {
-            Track t = objects.get(position);
+            final Track t = objects.get(position);
             ((ImageView) view.findViewById(R.id.cover)).setImageBitmap(t.cover);
             ((TextView) view.findViewById(R.id.trackName)).setText(t.trackName);
             ((TextView) view.findViewById(R.id.releaseDate)).setText(((t.released) ? "Вышел " : "Выйдет ") + t.releaseDate);
+            ((ImageView) view.findViewById(R.id.trackDownload)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    File musicDir = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_MUSIC);
+                    File trackFile = new File(musicDir + "/" +"Kirbo-" + t.trackFileName);
+                    try {
+                        MusicFragment.downloadTrack(ctx, t.trackFileName, trackFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
         return view;
     }
