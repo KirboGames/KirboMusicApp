@@ -65,7 +65,7 @@ public class MusicFragment extends Fragment {
             request.setDescription("Downloading");
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setVisibleInDownloadsUi(true);
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, "Kirbo-" + trackName);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, "KirboMusic/" + trackName);
 
             downloadmanager.enqueue(request);
         /*File musicDir = new File(Environment.getExternalStorageDirectory() + "/KirboMusic");

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.kgc.kirbomusic.ui.music.MusicFragment;
 
 import java.io.File;
@@ -52,13 +53,21 @@ public class TracksAdapter extends BaseAdapter {
             ((ImageView) view.findViewById(R.id.cover)).setImageBitmap(t.cover);
             ((TextView) view.findViewById(R.id.trackName)).setText(t.trackName);
             ((TextView) view.findViewById(R.id.releaseDate)).setText(((t.released) ? "Вышел " : "Выйдет ") + t.releaseDate);
+            final File musicDir = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_MUSIC + "/KirboMusic");
+            final File trackFile = new File(musicDir + "/" + t.trackFileName);
+            if (trackFile.exists()) {
+                ((ImageView) view.findViewById(R.id.trackDownload)).setVisibility(View.INVISIBLE);
+            }
             ((ImageView) view.findViewById(R.id.trackDownload)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    File musicDir = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_MUSIC);
-                    File trackFile = new File(musicDir + "/" +"Kirbo-" + t.trackFileName);
+
                     try {
-                        MusicFragment.downloadTrack(ctx, t.trackFileName, trackFile);
+                        if(t.released)
+                            MusicFragment.downloadTrack(ctx, t.trackFileName, trackFile);
+                        else{
+                            Toast.makeText(ctx, "Трек еще не вышел!", 3000);
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
