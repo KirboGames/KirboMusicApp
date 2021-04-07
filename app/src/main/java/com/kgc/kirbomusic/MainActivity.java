@@ -28,7 +28,7 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     JSONArray Music;
-    RequestQueue RequestQueue;
+    public RequestQueue RequestQueue;
     String externalFilesDir;
     File music;
     File version;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         createFiles();
         getDataBaseUpdate();
         Music = readDatabase(this);
-        downloadCovers();
+        downloadCovers(Music, coverDir);
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public void downloadCovers() {
+    public static void downloadCovers(final JSONArray Music, final File coverDir) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -166,5 +166,4 @@ public class MainActivity extends AppCompatActivity {
         });
         RequestQueue.add(StringRequest);
     }
-
 }
