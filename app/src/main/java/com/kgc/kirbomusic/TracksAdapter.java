@@ -1,14 +1,12 @@
 package com.kgc.kirbomusic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.kgc.kirbomusic.ui.music.MusicFragment;
 
 import java.io.File;
@@ -55,10 +53,7 @@ public class TracksAdapter extends BaseAdapter {
             ((TextView) view.findViewById(R.id.releaseDate)).setText(((t.released) ? "Вышел " : "Выйдет ") + t.releaseDate);
             final File musicDir = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_MUSIC + "/KirboMusic");
             final File trackFile = new File(musicDir + "/" + t.trackFileName);
-            if (trackFile.exists()) {
-                ((ImageView) view.findViewById(R.id.trackDownload)).setVisibility(View.INVISIBLE);
-            }
-            ((ImageView) view.findViewById(R.id.trackDownload)).setOnClickListener(new View.OnClickListener() {
+            /*((ImageView) view.findViewById(R.id.trackDownload)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -72,7 +67,7 @@ public class TracksAdapter extends BaseAdapter {
                         e.printStackTrace();
                     }
                 }
-            });
+            });*/
         }
         return view;
     }
