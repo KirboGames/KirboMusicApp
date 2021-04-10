@@ -2,4 +2,8 @@
     <string name="app_name">Kirbo Music</string>
     <string name="title_music">Музыка</string>
     <string name="title_news">Новости</string>
+    <string name="telegram">Telegram</string>
+    <string name="vk">VK</string>
+    <string name="youtube">Youtube</string>
+    <string name="spotify">Spotify</string>
 </resources>
