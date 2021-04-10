@@ -4,7 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,9 +36,19 @@ public class TrackInfoActivity extends AppCompatActivity {
         }
     }
     private void setContent() throws JSONException{
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 128;
-        Bitmap bitmap = BitmapFactory.decodeFile(intent.getStringExtra("FilesDir") + "/Cover/" + Track.getString("cover") + ".jpg", options);
-        ((ImageView) findViewById(R.id.TrackCover)).setImageBitmap(bitmap);
+        Bitmap bitmap = BitmapFactory.decodeFile(intent.getStringExtra("FilesDir") + "/Cover/" + Track.getString("cover") + ".jpg");
+        Bitmap bitmap1 = BitmapFactory.decodeFile(intent.getStringExtra("FilesDir") + "/Cover/" + Track.getString("cover") + ".jpg");
+        RenderScript rs = RenderScript.create(this);
+
+        final Allocation input = Allocation.createFromBitmap(rs, bitmap); //use this constructor for best performance, because it uses USAGE_SHARED mode which reuses memory
+        final Allocation output = Allocation.createTyped(rs, input.getType());
+        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        script.setRadius(20f);
+        script.setInput(input);
+        script.forEach(output);
+        output.copyTo(bitmap1);
+        ((ImageView) findViewById(R.id.track_info_track_cover)).setImageBitmap(bitmap);
+        ((ImageView) findViewById(R.id.track_info_track_cover_bg)).setImageBitmap(bitmap1);
+        ((TextView) findViewById(R.id.track_info_track_name)).setText(Track.getString("name"));
     }
 }
