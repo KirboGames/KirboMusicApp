@@ -50,5 +50,6 @@ public class TrackInfoActivity extends AppCompatActivity {
         ((ImageView) findViewById(R.id.track_info_track_cover)).setImageBitmap(bitmap);
         ((ImageView) findViewById(R.id.track_info_track_cover_bg)).setImageBitmap(bitmap1);
         ((TextView) findViewById(R.id.track_info_track_name)).setText(Track.getString("name"));
+        ((TextView) findViewById(R.id.about_track)).setText(Track.getString("about"));
     }
 }
