@@ -224,8 +224,8 @@ public class MusicFragment extends Fragment {
         for (int i = Music.length() - 1; i >= 0; i--) {
             JSONObject track = Music.getJSONObject(i);
             Bitmap bitmap = BitmapFactory.decodeFile(appDir + "/Cover/" + track.getString("cover") + ".jpg");
-            tracks.add(new Track(bitmap, track.getString("name"), track.getString("releaseDate"), track.getBoolean("released"), track.getString("track")));
-            System.out.println(track.getString("track"));
+            tracks.add(new Track(bitmap, track.getString("name"), track.getString("releaseDate"), track.getBoolean("released"), track.getString("track"), track));
+            System.out.println(track.getString("Youtube"));
         }
     }
 }

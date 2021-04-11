@@ -29,7 +29,6 @@ public class TrackInfoActivity extends AppCompatActivity {
         intent = getIntent();
         try {
             Track = new JSONObject(intent.getStringExtra("Track"));
-            System.out.println(Track.getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,6 +55,11 @@ public class TrackInfoActivity extends AppCompatActivity {
         ((ImageView) findViewById(R.id.track_info_track_cover_bg)).setImageBitmap(bitmap1);
         ((TextView) findViewById(R.id.track_info_track_name)).setText(Track.getString("name"));
         ((TextView) findViewById(R.id.about_track)).setText(Track.getString("about"));
+        if(Track.getString("Telegram").equals("")) findViewById(R.id.telegram_link).setVisibility(View.GONE);
+        if(Track.getString("VK").equals("")) findViewById(R.id.vk_link).setVisibility(View.GONE);
+        if(Track.getString("Youtube").equals("")) findViewById(R.id.youtube_link).setVisibility(View.GONE);
+        if(Track.getString("Spotify").equals("")) findViewById(R.id.spotify_link).setVisibility(View.GONE);
+
 
         ((CardView) findViewById(R.id.telegram_link)).setOnClickListener(new View.OnClickListener() {
             @Override
